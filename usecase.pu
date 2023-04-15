@@ -1,0 +1,32 @@
+@startuml Usecase
+
+actor User as u
+actor Doctor as d
+actor Patient as p
+
+(Authetntication) as au
+
+d --|> u
+p --|> u
+
+
+u --> au
+au --|> (Biometric) 
+au --|> (ID card) 
+au --|> (Credentials)
+
+d --> (Examination)
+(Remote) --> (Examination) : Extend
+(Re-) --> (Examination) : Extend
+
+(Print Instruction) as pi
+
+d --> pi
+p --> pi
+
+d --> (Notify)
+(Checkin) as ci
+p --> ci
+p --> (Payment)
+p --> (Deposit)
+ @enduml
