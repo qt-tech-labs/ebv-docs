@@ -1,0 +1,8 @@
+@startuml Patient management for doctor/admin
+
+actor Doctor as d
+boundary Application as a
+control Server as s
+
+
+@enduml

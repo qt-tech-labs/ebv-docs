@@ -1,0 +1,16 @@
+@startuml Patient_payment
+
+actor Patient as p
+boundary Applications as e
+control Server as s
+actor Bank as  b
+
+p -> e : Request to make a payment/deposit
+e -> p : Ask for the payment process type
+p -> e : Enter the type
+e -> b : Send the transition infor to banks services
+b -> e : Return with message
+e -> s : Append the new amount to the user data.
+s -> e : Present the result.
+
+@enduml

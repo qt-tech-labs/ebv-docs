@@ -1,0 +1,55 @@
+@startuml Checkin
+
+actor Patient as p
+boundary Standi as s
+control Server as sv
+database DB as db
+actor Printer as pr
+
+p -> s : Request for checking-in
+s -> p : Present checkin options
+p -> s : Select the way
+s -> s : Present the appropriate screen(camera, forms)
+s -> sv : Send data to validate
+sv -> db : Query the data
+db -> sv : Got the result
+alt exist
+    sv -> s : Successfull checkin
+else not any appointment
+    ref over sv : Standi_New_Appointment
+end
+
+newpage Standi_New_Appointment
+
+p -> s : Book a new appointment
+s -> p : As for presenting the ID Cards
+p -> s : Put the cards tothe designated position on the standi machine.
+s -> s : Capture and take out the data on the card.
+alt Fail
+    s -> p : Show message and ask for reform the card.
+else Success
+    s -> sv : Request to create a new user
+    sv -> db : Add a new user
+    db -> sv : Result with message
+    sv -> s : Return the result
+    alt Created Fail
+        s -> p : Present the message
+    else Success
+        sv -> s: Return the created user data/id
+        s -> p: Ask the patient for entering the desired time and examination type.
+        p -> s: Enter the requested data.
+        s -> sv : Create a new appoiment.
+        sv -> db : Add a new appointment
+        db -> sv : Return with message
+        sv -> s : Reurn with message
+
+        alt Fail
+            s -> p : Present the message
+        else Success
+            s -> pr : Print the appointment
+            s -> p : Print the Successfull screen
+        end
+
+    end    
+end         
+@enduml

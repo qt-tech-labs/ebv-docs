@@ -1,0 +1,39 @@
+@startuml Reservation at the Standi
+
+|User|
+start
+:Start to make reservation;
+|StandiApp|
+:Present the camera view;
+|User|
+:Put the ID Cards to the designated position;
+|StandiApp|
+:Detect the data on the cards;
+:Send request to create a new account;
+|Server|
+:Validate the input;
+if (valid?) then (yes) 
+    |StandiApp|
+    :Show the successfull screen;
+    :Prensent the reservation screen;
+    |User|
+    :Input the desired reservation;
+    |StandiApp|
+    :Request to make a reservation;
+    |Server|
+    :Create the reservation;
+    if (success?) then (yes)
+        |StandiApp|
+        :Show the success screen;
+        :Print the reservation note;
+    else (no)
+        :Present the error screen with message;
+        :Ask to perform again;
+        stop
+    endif    
+else (no) 
+    :Present the error screen with the detail message;
+endif
+end
+
+@enduml

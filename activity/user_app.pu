@@ -1,0 +1,26 @@
+@startuml User app
+start 
+:Enter the user app;
+if (is logged-in?) then (no)
+    :Load the booking view;
+    :Scan required documents;
+    :Create a new appointment;
+    :Make payment;
+    if (done?) then (yes)
+        label sp_lab1
+        :Load booking views;
+    else (no) 
+        :Load error view and retry;
+    endif
+(yes) elseif (have any appointments) then (yes )
+    :Load the upcomming events;
+else (no)
+    label sp_lab0
+    label sp_lab4
+    label sp_lab5
+    label sp_lab6
+    label sp_lab2
+    goto sp_lab1
+endif 
+end
+@enduml

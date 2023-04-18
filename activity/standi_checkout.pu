@@ -1,0 +1,21 @@
+@startuml Standi checkout
+
+|User|
+start
+:Press checkout button;
+|Standi|
+:Present the camera view;
+|User|
+:Put the code/note under the camera;
+|Standi|
+:Detect the information;
+:Load the reservation infor;
+:Get the amount;
+|User|
+:Select the payment method;
+:Input money/Scan QR code;
+|Standi|
+:Print the reciept;
+end
+
+@enduml

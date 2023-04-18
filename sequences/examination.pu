@@ -1,0 +1,20 @@
+@startuml Remote examination
+
+actor Doctor as d
+actor Patient as p
+boundary AdminApp as a
+boundary UserApp as u
+control Server as s
+control AWS as w
+
+
+d -> a : Start the examination process
+a -> s : Create an examination request
+s -> w : Create a room for meeting
+s -> p : Notify about an incomming examination
+p -> w : Join the examination meeting
+d -> p : Do examination
+d -> a : Enter the examination result
+a -> p : Print the instruction and notify the pay check
+
+@enduml
